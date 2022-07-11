@@ -18,7 +18,7 @@ public class ShiroConfig  {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager defaultWebSecurityManager){
         ShiroFilterFactoryBean  bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(defaultWebSecurityManager);
-        /*
+        /* git 测试
          UsernamePasswordToken userToken = (UsernamePasswordToken) token;
         User user = userService.queryUserByName(userToken.getUsername());
         if(user==null){

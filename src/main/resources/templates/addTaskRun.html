@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro" xmlns:c="http://www.springframework.org/schema/p">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+<nav class="alert alert-danger">
+    <ul class="nav nav-pills">
+        <li role="presentation" ><a href="/home">Home</a></li>
+        <li shiro:guest role="presentation" ><a th:href="@{/toLogin}">请登录</a></li>
+        <li role="presentation">
+            <a th:href="@{/logout}">注销</a></li>
+
+
+
+    </ul>
+</nav>
+
+<div class="container" >
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>欢迎[[${session.loginUser}]]用户！！！活动报名界面</small></h1>
+            </div>
+        </div>
+    </div>
+    <form action="/addTaskRun" method="post">
+        <div class="form-group">
+            <label for="bkname">活动名称:</label>
+            <input type="text" name="runTaskName" class="form-control" th:value="${taskRun.runTaskName}" id="bkname"
+        </div>
+
+
+        <div class="form-group">
+            <label for="bkname">负责人姓名:</label>
+            <input type="text" name="runHeadName" class="form-control" id="bkname" >
+        </div>
+        <div class="form-group">
+            <label for="bkname">负责人学号:</label>
+            <input type="text" name="runHeadID" class="form-control" id="bkname" >
+        </div>
+        <div class="form-group">
+            <label for="bkname">联系方式:</label>
+            <input type="text" name="runHeadTel" class="form-control" id="bkname" >
+        </div>
+
+
+        <div class="form-group">
+            <label for="bkname">进行时间:</label>
+            <input type="text" name="runTime" class="form-control" th:value="${taskRun.runTime}" id="bkname"
+        </div>
+        <div class="form-group">
+            <label for="bkname">进行地点:</label>
+            <input type="text" name="runSite" class="form-control" th:value="${taskRun.runSite}" id="bkname"
+        </div>
+        <div class="form-group">
+            <label for="bkname">安全事故承诺:</label>
+            <input type="text" name="runCommitment" class="form-control" th:value="${taskRun.runCommitment}" id="bkname"
+        </div>
+        <div class="form-group">
+            <label for="bkname">报名人数:</label>
+            <input type="text" name="taskNumber" class="form-control" id="bkname" >
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <label for="bkname">报名:</label>
+            <input type="submit"  class="form-control" value="确定报名" id="bkname"
+        </div>
+    </form>
+
+    </tbody>
+    </table></div>
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

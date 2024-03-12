@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro" xmlns:c="http://www.springframework.org/schema/p">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+<nav class="alert alert-danger">
+    <ul class="nav nav-pills">
+        <li role="presentation" ><a href="/home">Home</a></li>
+        <li shiro:guest role="presentation" ><a th:href="@{/toLogin}">请登录</a></li>
+        <li role="presentation">
+            <a th:href="@{/logout}">注销</a>
+        </li>
+        <li  shiro:hasPermission="business" role="presentation"><a href="/toAddDiscount">
+            <form action="/toAddDiscount" >
+                <input type="hidden" th:value="${session.loginUser}" name="userName">
+                <input type="submit" value="添加优惠">
+            </form>
+        </a>
+
+        <li style="float: right">
+        <form  role="presentation" class="form-inline" action="/queryDiscountByName"  style="float: right">
+            <input type="text" name="discountName" class="form-control" placeholder="请输入需要查询优惠活动的名称">
+            <input type="submit" value="查询" class="btn bt">
+        </form>
+        </li>
+
+
+    </ul>
+</nav>
+
+<div class="container" >
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>欢迎[[${session.loginUser}]]用户！！！一下是所有优惠活动展示</small>
+
+
+                </h1>
+
+            </div></div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>优惠名称</th><th>优惠描述</th><th>优惠时间</th><th>优惠时间</th><th>开始预定</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+<!--                <c:forEach var="book" items="${list}">-->
+<!--                    <tr>-->
+<!--                        <td>${{book.bookID}}</td>-->
+<!--                        <td>${book.bookName}</td>-->
+<!--                        <td>${ book.bookCounts}</td>-->
+<!--                        <td>${book.detail}</td></tr>-->
+<!--                </c:forEach>-->
+
+
+
+
+                <tr th:each="discount:${taskList}">
+                    <td th:text="${discount.discountName}"></td>
+
+                    <td  th:text="${discount.discountDetail}"></td>
+                    <td th:text="${discount.discountTime}"></td>
+
+                    <td th:text="${discount.discountSite}"></td>
+                    <td>
+                        <form action="/toAddOrder">
+                            <input type="hidden" th:value="${discount.discountName}" name="discountName">
+                            <input type="hidden" th:value="${discount.discountDetail}" name="discountDetail">
+                            <input type="hidden" th:value="${discount.discountTime}" name="discountTime">
+                            <input type="hidden" th:value="${discount.discountSite}" name="discountSite">
+                            <input type="hidden" th:value="${session.loginUser}" name="userName">
+                            <input type="submit" value="预定">
+                        </form>
+
+
+                    </td>
+
+                    <td shiro:hasPermission="business">
+                        <form action="/deleteDiscount">
+                            <input type="hidden" th:value="${session.loginUser}" name="userName">
+                            <input type="hidden" th:value="${discount.discountID}" name="discountID">
+                            <input type="hidden" th:value="${discount.discountCreater}" name="discountCreater">
+                            <input type="submit" value="删除">
+                        </form>
+                    </td>
+                    <td>
+
+                    </td>
+
+
+
+                </tr>
+
+
+                </tbody>
+            </table></div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -54,15 +54,16 @@ filterMap.put(Constants.PREFIX +"/logout",“logout”);
 
          */
         filterMap.put("/user/add","authc");
+        filterMap.put("/user/add","perms[vip1]");
         filterMap.put("/user/update","authc");
 
 
-        filterMap.put("/logout","logout");
+        filterMap.put("/logout","logout");//,此处对注销起作用
 
 
         bean.setFilterChainDefinitionMap(filterMap);
-        bean.setLoginUrl("/toLogin");
-        bean.setUnauthorizedUrl("/unathor");
+        bean.setLoginUrl("/toLogin");//没有登录，跳转到这里
+        bean.setUnauthorizedUrl("/unathor"); //登录后，但没有权限，跳转此路径
 
         return  bean;
     }

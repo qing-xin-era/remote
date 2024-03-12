@@ -51,7 +51,7 @@ public class UserController {
     public String index(Model mode) {
 
 
-        return "index";
+        return "redirect:/allTask";
     }
     @GetMapping("/trans")
     public String trans(Model mode) {
@@ -77,6 +77,7 @@ public class UserController {
     }
     @GetMapping("/toLogin")
     public String toLogin(Model mode) {
+        System.out.println("hahaahahah");
         mode.addAttribute("me","themleaf");
         return "login";
     }
@@ -87,7 +88,7 @@ public class UserController {
         UsernamePasswordToken Token = new UsernamePasswordToken(username,password);
         try {
             subject.login(Token);
-            return "index";
+            return "redirect:/allTask";
         } catch (UnknownAccountException e) {       //用户名错误
             e.printStackTrace();
             model.addAttribute("message","用户名错误！");
@@ -115,7 +116,7 @@ public class UserController {
         mode.addAttribute("update","uuuuuuu");
         return "user/update";
     }
-    @RequestMapping("/logout")
+    @RequestMapping("/logout") //整合shiro后，注销并不走此处的logout,而是在shiroconfig.java的配置里。
     public String logout(){
         return "redirect:/toLogin";
     }

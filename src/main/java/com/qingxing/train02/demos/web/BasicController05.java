@@ -64,5 +64,6 @@ public class BasicController05 {
             , @RequestParam(name = "age", defaultValue = "12") Integer age, User user) {
         user.setName("zhangsan");
         user.setAge(18);
+        System.out.println("12");
     }
 }
